@@ -1,0 +1,6 @@
+{
+    "Level": 0,
+    "Coins": 0.0,
+    "Shop": [["2 Dashes", 35, "assets/2 dash.png", true], ["Speed +", 10, "assets/speed +.png", true], ["Speed ++", 20, "assets/speed ++.png", true], ["Dash distance +", 10, "assets/dash +.png", true], ["Dash distance ++", 20, "assets/dash ++.png", true], ["Hunt frequency -", 10, "assets/hunts -.png", true], ["Hunt frequency --", 20, "assets/hunts --.png", true], ["Stealth skin", 2, "assets/sneak_tank.png", true], ["Radar skin", 2, "assets/radar_tank.png", true], ["Amplifier skin", 2, "assets/healing_tank.png", true], ["Goon skin", 2, "assets/tank.png", true], ["Missile skin", 2, "assets/missile_tank.png", true]],
+    "Level Unlocked": 0
+}
