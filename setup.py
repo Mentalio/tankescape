@@ -4,7 +4,7 @@ import shutil
 
 APP = ['main.py']
 
-LEVELS_FILES = [('levels', [f'levels/{i}.json' for i in range(0, 16)])]
+LEVELS_FILES = [('levels', [f'levels/{file_name}' for file_name in os.listdir('levels') if os.path.isfile(f'levels/{file_name}')])]
 ASSETS = [('assets', [f'assets/{file_name}' for file_name in os.listdir('assets') if os.path.isfile(f'assets/{file_name}')])]
 ASSETS_MISC = ['save.json']
 
