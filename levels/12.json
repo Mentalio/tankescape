@@ -5,5 +5,10 @@
     "Normal": 18,
     "Radar": 3,
     "Sneak": 6,
-    "Missile": 4
+    "Missile": 4,
+    "Notification": {
+        "text": "These are too thick\nTo dash across!\nYou have to go around.",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

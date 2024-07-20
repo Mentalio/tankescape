@@ -5,5 +5,10 @@
     "Normal": 13,
     "Radar": 5,
     "Sneak": 1,
-    "Missile": 0
+    "Missile": 0,
+    "Notification": {
+        "text": "There's a high amount of\nradars! Try to use their\nslow speed Against them.",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

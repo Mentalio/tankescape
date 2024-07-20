@@ -5,5 +5,10 @@
     "Normal": 16,
     "Radar": 4,
     "Sneak": 6,
-    "Missile": 0
+    "Missile": 0,
+    "Notification": {
+        "text": "Warning! We picked up\nA new tank on the\nNext floor!",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

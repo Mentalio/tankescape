@@ -5,5 +5,10 @@
     "Normal": 20,
     "Radar": 4,
     "Sneak": 5,
-    "Missile": 3
+    "Missile": 3,
+    "Notification": {
+        "text": "Missile tanks can shoot\nYou from across the map!\nDon't stand still.",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

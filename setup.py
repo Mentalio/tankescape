@@ -19,7 +19,7 @@ setup(
     name='Tank Escape',
     data_files=DATA_FILES,
     options={'py2app': OPTIONS},
-    setup_requires=['py2app'],
+    setup_requires=['py2app', 'pygame'],
     version='1.0',
     description='Sneak your way through the facility to retrieve the data and win the war',
     author='Mentalio',

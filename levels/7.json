@@ -5,5 +5,10 @@
     "Normal": 17,
     "Radar": 2,
     "Sneak": 4,
-    "Missile": 0
+    "Missile": 0,
+    "Notification": {
+        "text": "Odd building they made.\nWhat's it for?",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

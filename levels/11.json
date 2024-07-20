@@ -5,5 +5,10 @@
     "Normal": 16,
     "Radar": 3,
     "Sneak": 5,
-    "Missile": 5
+    "Missile": 5,
+    "Notification": {
+        "text": "First of two.\nI recommend\nDashing across the wall.",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

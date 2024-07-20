@@ -5,5 +5,10 @@
     "Normal": 21,
     "Radar": 3,
     "Sneak": 6,
-    "Missile": 5
+    "Missile": 5,
+    "Notification": {
+        "text": "There's a weak point\nIn that wall!\nDash through that!",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

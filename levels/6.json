@@ -5,5 +5,10 @@
     "Normal": 5,
     "Radar": 2,
     "Sneak": 10,
-    "Missile": 0
+    "Missile": 0,
+    "Notification": {
+        "text": "There's more cloaks!\nKeep a close eye\non them.",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

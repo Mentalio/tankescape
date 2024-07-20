@@ -5,5 +5,10 @@
     "Normal": 16,
     "Radar": 4,
     "Sneak": 2,
-    "Missile": 0
+    "Missile": 0,
+    "Notification": {
+        "text": "There's a long road ahead\nOf you, Double dashes\n Will help.",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

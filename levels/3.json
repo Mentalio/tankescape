@@ -5,5 +5,10 @@
     "Normal": 16,
     "Radar": 0,
     "Sneak": 3,
-    "Missile": 0
+    "Missile": 0,
+    "Notification": {
+        "text": "Our radars picking\nsomething up! Be on\nhigh alert for cloaked tanks.",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

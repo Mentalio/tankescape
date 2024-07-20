@@ -10,6 +10,7 @@ import platform
 
 coins_special = 0
 coins_special_pure = 0
+debug = False
 
 pygame.init()
 pygame.mixer.init()
@@ -175,13 +176,6 @@ def reset_data_full():
     global coins, coins_special, coins_special_pure
     un_level_all()
     un_shop_all()
-    shop_items_classes[16].unlocked = False
-    shop_items_classes[3].unlocked = False
-    shop_items_classes[4].unlocked = False
-    shop_items_classes[6].unlocked = False
-    shop_items_classes[7].unlocked = False
-    shop_items_classes[9].unlocked = False
-    shop_items_classes[10].unlocked = False
     skins.clear()
     skin('player_tank.png')
     coins = 0
@@ -321,6 +315,8 @@ def load_json(filepath: str):
     healer_enemies_count = int(json_file['Healer'])
     sneak_enemies_count = int(json_file['Sneak'])
     missile_enemies_count = int(json_file['Missile'])
+    notification_file = json_file["Notification"]
+    Notification(notification_file["text"], bool(notification_file["speaker"]), pygame.image.load(notification_file["image"]))
     return json_file['Player'], json_file['Enemy']
 
 
@@ -381,7 +377,7 @@ class ShopItem:
     def draw(self, offset_x, offset_y):
         if not self.bought:
             if self.unlocked:
-                global prompt_shop_item, shop_item_offset, mouse_pressed
+                global prompt_shop_item, shop_item_offset, mouse_pressed, mouse_pos
                 item_font = font_sml.render(self.name, True, (255, 255, 255))
                 item_font_cost = font_sml.render(str(self.cost), True, (255, 255, 255))
                 item_rect = pygame.Rect(0, 0, 300, 120)
@@ -419,8 +415,8 @@ class Notification:
         self.image = image
         self.speaker_enabled = speaker
         self.extended = False
-        self.pos = [current_width - 350, 0]
-        self.rect = pygame.Rect(0, 0, 300, 100)
+        self.pos = [current_width - 400, 0]
+        self.rect = pygame.Rect(0, 0, 350, 100)
         self.time = 0
         self.is_done = False  # New attribute to track completion
 
@@ -469,6 +465,8 @@ class Notification:
                     self.is_done = True
 
             self.draw()
+        else:
+            notifications.remove(self)
 
 
 class Pathfinder:
@@ -592,9 +590,9 @@ class Pathfinder:
             self.hunting = True
             hunting_alert.play()
 
-        if self.hunting and self.idle_timer < 120:
+        if self.hunting and self.idle_timer <= 120:
             self.seeking = True
-            if self.idle_timer % 10:
+            if update_player_target or self.idle_timer == 120:
                 try:
                     self.create_path([int(player.player.sprite.pos[0]), int(player.player.sprite.pos[1])])
                 except:
@@ -617,9 +615,10 @@ class Pathfinder:
                 pass
 
     def draw_hunting(self):
-        # hunting_chance_render = font_sml.render(f'{str(self.hunting_chance)}', True, (255, 0, 0))
-        # blitset(hunting_chance_render, [self.player.sprite.rect.center[0] - hunting_chance_render.get_rect().w / 2,
-        # 						 self.player.sprite.rect.center[1] - 90])
+        if debug:
+            hunting_chance_render = font_sml.render(f'{str(self.hunting_chance * 60 * hunt_frequency)}', True, (255, 0, 0))
+            blitset(hunting_chance_render, [self.player.sprite.rect.center[0] - hunting_chance_render.get_rect().w / 2,
+                                     self.player.sprite.rect.center[1] - 90])
         if self.hunting:
             if self.seeking:
                 hunting_ai = self.seeking_icon
@@ -638,6 +637,8 @@ class Pathfinder:
         self.player.update()
         self.draw_hunting()
         self.player.sprite.draw()
+        if debug:
+            self.draw_path_objects()
 
 
 class Pathfinderplayer(Pathfinder):
@@ -772,11 +773,12 @@ class Pathfinder_healer(Pathfinder):
             self.hunting = True
             hunting_alert.play()
 
-        if self.hunting and self.idle_timer < 120 and self.idle_timer % 10:
-            try:
-                path_check = self.create_path([int(player.player.sprite.pos[0]), int(player.player.sprite.pos[1])])
-            except:
-                pass
+        if self.hunting and self.idle_timer <= 120:
+            if update_player_target or self.idle_timer == 120:
+                try:
+                    path_check = self.create_path([int(player.player.sprite.pos[0]), int(player.player.sprite.pos[1])])
+                except:
+                    pass
 
         if self.idle_timer > 0:
             self.idle_timer -= 1
@@ -1081,6 +1083,13 @@ def un_level_all():
 def un_shop_all():
     for x in shop_items_classes:
         x.bought = False
+    shop_items_classes[16].unlocked = False
+    shop_items_classes[3].unlocked = False
+    shop_items_classes[4].unlocked = False
+    shop_items_classes[6].unlocked = False
+    shop_items_classes[7].unlocked = False
+    shop_items_classes[9].unlocked = False
+    shop_items_classes[10].unlocked = False
     update_items()
 
 
@@ -1202,6 +1211,8 @@ new_height = screen_height
 size_changed = False
 hover_color = (50, 50, 50)
 console_error_timer = 0
+update_player_target = False
+old_player_grid_pos = [0, 0]
 
 update_items()
 console_input = ''
@@ -1236,6 +1247,11 @@ while running:
     maximized = (current_width, current_height) == (window_w, window_h)
 
     if game_started:
+
+        # Check if player grid position changed
+        if old_player_grid_pos != player.player.sprite.get_coord():
+            update_player_target = True
+            old_player_grid_pos = player.player.sprite.get_coord()
 
         rebirth_available_old = rebirth_available
 
@@ -1302,7 +1318,7 @@ while running:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pressed = True
                 if not paused:
-                    if pygame.key.get_mods() and pygame.KMOD_SHIFT:
+                    if pygame.key.get_mods() & pygame.KMOD_SHIFT:
                         mouse_shift_pressed = True
                     else:
                         try:
@@ -1628,8 +1644,8 @@ while running:
             console_error_render.set_alpha(console_error_alpha)
             screen.blit(console_error_render, [10, 10])
 
-        for note in notifications:
-            note.update()
+        if notifications:
+            notifications[0].update()
 
         if rebirth_available_old != rebirth_available:
             shop_items_classes[16].unlock()
@@ -1639,6 +1655,7 @@ while running:
         shift_pressed = False
         mouse_shift_pressed = False
         mouse_pressed = False
+        update_player_target = False
     else:
         mouse_pressed = False
         if new_width != current_width or new_height != current_height:

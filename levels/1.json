@@ -5,5 +5,10 @@
     "Normal": 15,
     "Radar": 1,
     "Sneak": 0,
-    "Missile": 0
+    "Missile": 0,
+    "Notification": {
+        "text": "A radar enemy is here\nStay out of its range\nOr it'll be alerted of you.",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

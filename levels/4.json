@@ -5,5 +5,10 @@
     "Normal": 15,
     "Radar": 2,
     "Sneak": 1,
-    "Missile": 0
+    "Missile": 0,
+    "Notification": {
+        "text": "They've built up a small\nforce here!. We need\nto go deeper than this.",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

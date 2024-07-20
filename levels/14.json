@@ -5,5 +5,10 @@
     "Normal": 17,
     "Radar": 3,
     "Sneak": 6,
-    "Missile": 9
+    "Missile": 9,
+    "Notification": {
+        "text": "Its the second base!\nIts a long way to\nThe end.",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

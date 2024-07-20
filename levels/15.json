@@ -5,5 +5,10 @@
     "Normal": 22,
     "Radar": 4,
     "Sneak": 3,
-    "Missile": 6
+    "Missile": 6,
+    "Notification": {
+        "text": "We're back at the first\nFloor! However theres\nA lot more of them...",
+        "speaker": "False",
+        "image": "assets/agent.png"
+    }
 }

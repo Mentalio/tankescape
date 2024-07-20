@@ -1,8 +1,8 @@
 {
     "Level": 0,
-    "Coins": 0,
-    "CoinsSpecial": 0,
-    "CoinsSpecialPure": 0,
+    "Coins": 0.0,
+    "CoinsSpecial": 0.0,
+    "CoinsSpecialPure": 0.0,
     "Shop": [
   [
     "2 Dashes",
@@ -144,7 +144,7 @@
     "SuperTank Skin",
     5,
     "assets/super_tank.png",
-    true,
+    false,
     true,
     2
   ],
@@ -152,10 +152,10 @@
     "SuperDrone Skin",
     5,
     "assets/drone_tank.png",
-    true,
+    false,
     true,
     2
   ]
 ],
-    "Level Unlocked": 4
+    "Level Unlocked": 0
 }
